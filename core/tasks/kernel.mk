@@ -60,7 +60,11 @@ ifeq "$(wildcard $(KERNEL_SRC) )" ""
         $(warning * THIS IS DEPRECATED, AND WILL BE DISCONTINUED                *)
         $(warning * Please configure your device to download the kernel         *)
         $(warning * source repository to $(KERNEL_SRC))
+<<<<<<< HEAD
         $(warning * See $(URL_INTEGRATED_KERNEL_BUILD))
+=======
+        $(warning * See $(URL_INTEGRATED_KERNEL_BUILD)
+>>>>>>> 4723495e7... build: Inline kernel building as a buildtime task
         $(warning * for more information                                        *)
         $(warning ***************************************************************)
         FULL_KERNEL_BUILD := false
