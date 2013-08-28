@@ -61,10 +61,14 @@ ifeq "$(wildcard $(KERNEL_SRC) )" ""
         $(warning * Please configure your device to download the kernel         *)
         $(warning * source repository to $(KERNEL_SRC))
 <<<<<<< HEAD
+<<<<<<< HEAD
         $(warning * See $(URL_INTEGRATED_KERNEL_BUILD))
 =======
         $(warning * See $(URL_INTEGRATED_KERNEL_BUILD)
 >>>>>>> 4723495e7... build: Inline kernel building as a buildtime task
+=======
+        $(warning * See $(URL_INTEGRATED_KERNEL_BUILD))
+>>>>>>> d28b46236... build: Fix kernel.mk typos
         $(warning * for more information                                        *)
         $(warning ***************************************************************)
         FULL_KERNEL_BUILD := false
