@@ -374,6 +374,7 @@ ifeq ($(my_clang),false)
 endif
 
 my_sdclang := $(strip $(LOCAL_SDCLANG))
+my_qcclang := $(strip $(LOCAL_QCCLANG))
 
 # clang is enabled by default for host builds
 # enable it unless we've specifically disabled clang above
@@ -448,6 +449,12 @@ ifeq ($(SDCLANG),true)
         ifeq ($(TARGET_USE_SDCLANG),true)
             my_sdclang := true
         endif
+    endif
+endif
+
+ifeq ($(QCCLANG),true)
+    ifeq ($(my_qcclang),)
+        my_qcclang := true
     endif
 endif
 
@@ -610,6 +617,15 @@ my_target_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOB
         endif
         ifeq ($(strip $(my_cxx)),)
             my_cxx := $(my_cxx_wrapper) $(SDCLANG_PATH)/clang++
+        endif
+    endif
+
+    ifeq ($(my_qcclang),true)
+        ifeq ($(strip $(my_cc)),)
+            my_cc := $(QCCLANG_PATH)/clang -mno-ae
+        endif
+        ifeq ($(strip $(my_cxx)),)
+            my_cxx := $(QCCLANG_PATH)/clang++ -mno-ae
         endif
     endif
 else
