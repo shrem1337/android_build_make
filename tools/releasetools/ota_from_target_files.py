@@ -473,8 +473,13 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     # Stage 3/3: Make changes.
     script.Comment("Stage 3/3")
 
-  # Dump fingerprints
-  script.Print("Target: %s" % target_fp)
+  script.Print(" ")
+  script.Print(" ____  _          _   ____            _   ")
+  script.Print("|  _ \(_)_  _____| | |  _ \ _   _ ___| |_ ")
+  script.Print("| |_) | \ \/ / _ \ | | | | | | | / __| __|")
+  script.Print("|  __/| |>  <  __/ | | |_| | |_| \__ \ |_ ")
+  script.Print("|_|   |_/_/\_\___|_| |____/ \__,_|___/\__|")
+  script.Print(" ")
 
   device_specific.FullOTA_InstallBegin()
 
@@ -533,6 +538,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.RunBackup("restore")
     script.Unmount("/system")
 
+  script.Print(" ")
+  script.Print("Flashing Kernel..")
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
 
