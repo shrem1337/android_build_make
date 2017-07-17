@@ -2454,7 +2454,7 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 pixeldust: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CUSTOM_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) > $(CUSTOM_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_CYN}"Package Complete: $(CUSTOM_TARGET_PACKAGE)"${CL_RST}
+	$(hide) ./vendor/pixeldust/tools/pd.sh
 
 endif    # build_ota_package
 
