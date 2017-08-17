@@ -162,6 +162,17 @@ function check_variant()
     return 1
 }
 
+function mka() {
+    case `uname -s` in
+        Darwin)
+            m -j "$@"
+            ;;
+        *)
+            mk_timer schedtool -B -n 10 -e ionice -n 7 m -j "$@"
+            ;;
+    esac
+}
+
 function setpaths()
 {
     local T=$(gettop)
