@@ -653,7 +653,7 @@ function breakfast()
         else
             # This is probably just the model name
             if [ -z "$variant" ]; then
-                variant="user"
+                variant="userdebug"
             fi
             lunch $target-$variant
         fi
