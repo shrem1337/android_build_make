@@ -880,6 +880,9 @@ dont_bother_goals := clean clobber dataclean installclean \
     vbmetaimage-nodeps \
     product-graph dump-products
 
+# Rules for QCOM targets
+include $(BUILD_SYSTEM)/qcom_target.mk
+
 ifndef KATI
 include $(BUILD_SYSTEM)/ninja_config.mk
 include $(BUILD_SYSTEM)/soong_config.mk
@@ -890,8 +893,5 @@ ifneq ($(CUSTOM_BUILD),)
 ## last, to avoid accidental resetting by device configs
 $(eval include vendor/pixeldust/sepolicy/sepolicy.mk)
 endif
-
-# Rules for QCOM targets
-include $(BUILD_SYSTEM)/qcom_target.mk
 
 include $(BUILD_SYSTEM)/dumpvar.mk
