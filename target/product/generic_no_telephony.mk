@@ -21,7 +21,6 @@ PRODUCT_PACKAGES := \
     Bluetooth \
     BluetoothMidiService \
     MusicFX \
-    NfcNci \
     OneTimeInitializer \
     Provision \
     SystemUI \
