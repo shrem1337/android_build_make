@@ -20,6 +20,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - sepgrep:   Greps on all local sepolicy files.
 - sgrep:     Greps on all local source files.
 - godir:     Go to the directory containing a file.
+- mka:      Builds using SCHED_BATCH on all processors
 
 Environment options:
 - SANITIZE_HOST: Set to 'true' to use ASAN for all host modules. Note that
@@ -151,6 +152,22 @@ function check_variant()
         fi
     done
     return 1
+}
+
+function mka() {
+   local T=$(gettop)
+   if [ "$T" ]; then
+       case `uname -s` in
+           Darwin)
+               make -C $T -j `sysctl hw.ncpu|cut -d" " -f2` "$@"
+               ;;
+           *)
+               mk_timer schedtool -B -n 1 -e ionice -n 1 make -C $T -j$(cat /proc/cpuinfo | grep "^processor" | wc -l) "$@"
+               ;;
+       esac
+     else
+       echo "Couldn't locate the top of the tree.  Try setting TOP."
+   fi
 }
 
 function setpaths()
@@ -1603,10 +1620,10 @@ function get_make_command()
     fi
 }
 
-function _wrap_build()
+function mk_timer()
 {
     local start_time=$(date +"%s")
-    "$@"
+    $@
     local ret=$?
     local end_time=$(date +"%s")
     local tdiff=$(($end_time-$start_time))
@@ -1636,14 +1653,14 @@ function _wrap_build()
     elif [ $secs -gt 0 ] ; then
         printf "(%s seconds)" $secs
     fi
-    echo " ####${color_reset}"
-    echo
+    printf " ####${color_reset}\n\n"
     return $ret
 }
 
 function make()
 {
-    _wrap_build $(get_make_command) "$@"
+    mk_timer $(get_make_command) "$@"
+
 }
 
 function provision()
@@ -1673,6 +1690,9 @@ function provision()
         fi
     fi
     "$ANDROID_PRODUCT_OUT/provision-device" "$@"
+    echo " ####${color_reset}"
+    echo
+    return $ret
 }
 
 if [ "x$SHELL" != "x/bin/bash" ]; then
