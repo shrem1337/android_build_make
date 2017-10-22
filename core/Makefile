@@ -2640,6 +2640,12 @@ bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CUSTOM_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) > $(CUSTOM_TARGET_PACKAGE).md5sum
 	$(hide) ./vendor/pixeldust/tools/pd.sh
+	@echo ""
+	@echo -e ${CL_CYN}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
+	@echo -e ${CL_CYN}"Package zip: "${CL_MAG} $(CUSTOM_TARGET_PACKAGE)                                 ${CL_RST}
+	@echo -e ${CL_CYN}"Package md5: "${CL_MAG}" `cat $(CUSTOM_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
+	@echo -e ${CL_CYN}"Package size:"${CL_MAG}" `du -h $(CUSTOM_TARGET_PACKAGE) | cut -f 1`            "${CL_RST}
+	@echo -e ${CL_CYN}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
 
 endif    # build_ota_package
 
