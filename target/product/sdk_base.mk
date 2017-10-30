@@ -17,26 +17,18 @@
 PRODUCT_PROPERTY_OVERRIDES :=
 
 PRODUCT_PACKAGES := \
-	ApiDemos \
 	CellBroadcastReceiver \
 	CubeLiveWallpapers \
 	CustomLocale \
 	Development \
 	Dialer \
-	EmulatorSmokeTests \
 	Fallback \
-	Gallery2 \
 	GestureBuilder \
 	Launcher3 \
 	LegacyCamera \
 	librs_jni \
-	libwnndict \
-	libWnnEngDic \
-	libWnnJpnDic \
 	LiveWallpapersPicker \
 	Mms \
-	Music \
-	OpenWnn \
 	Protips \
 	rild \
 	screenrecord \
