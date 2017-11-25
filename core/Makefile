@@ -2642,9 +2642,7 @@ pixeldust: otapackage
 	@echo -e ${CL_CYN}"Package md5: "${CL_MAG}" `cat $(CUSTOM_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
 	@echo -e ${CL_CYN}"Package size:"${CL_MAG}" `du -h $(CUSTOM_TARGET_PACKAGE) | cut -f 1`            "${CL_RST}
 	@echo -e ${CL_CYN}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
-	@echo ""
-	@echo -e "Now the build is done, let's kill jack.            "
-	jack-admin stop-server
+
 endif    # build_ota_package
 
 # -----------------------------------------------------------------
