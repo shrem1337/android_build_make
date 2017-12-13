@@ -229,7 +229,7 @@ ifneq (,$(user_variant))
   ADDITIONAL_DEFAULT_PROPERTIES += security.perf_harden=1
 
   ifeq ($(user_variant),user)
-    ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+    ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=1
     ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
   endif
 
