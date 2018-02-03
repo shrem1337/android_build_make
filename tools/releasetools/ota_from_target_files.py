@@ -446,7 +446,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
       info_dict=OPTIONS.info_dict)
 
   #assert HasRecoveryPatch(input_zip)
-  has_vendor_partition = "/vendor" in OPTIONS.info_dict["fstab"]
 
   metadata["ota-type"] = "BLOCK"
 
@@ -523,12 +522,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   if OPTIONS.backuptool:
     script.Mount("/system")
-    if has_vendor_partition:
-      script.Mount("/vendor")
     script.RunBackup("backup")
     script.Unmount("/system")
-    if has_vendor_partition:
-      script.Unmount("/vendor")
 
   script.ShowProgress(0.5, 0)
 
@@ -574,12 +569,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   if OPTIONS.backuptool:
     script.Mount("/system")
-    if has_vendor_partition:
-      script.Mount("/vendor")
     script.RunBackup("restore")
     script.Unmount("/system")
-    if has_vendor_partition:
-      script.Unmount("/vendor")
 
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
