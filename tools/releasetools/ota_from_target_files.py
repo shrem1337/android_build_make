@@ -581,27 +581,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   bootpartition = "/boot" if OPTIONS.override_boot_partition == "" else OPTIONS.override_boot_partition
   script.WriteRawImage(bootpartition, "boot.img")
 
-  script.ShowProgress(0.05, 5)
-  script.WriteRawImage("/boot", "boot.img")
-
-  if OPTIONS.info_dict.get("default_root_method") == "magisk":  
-    script.Print(" ")
-    script.Print("Flashing Magisk...")
-    script.Print(" ")
-    common.ZipWriteStr(output_zip, "magisk/magisk.zip",
-                   ""+input_zip.read("SYSTEM/addon.d/magisk.zip"))
-    script.FlashMagisk()
-    script.Print(" ")
-
-  if OPTIONS.info_dict.get("default_root_method") == "supersu":
-    script.Print("Flashing SuperSU...")
-    common.ZipWriteStr(output_zip, "supersu/supersu.zip",
-                   ""+input_zip.read("SYSTEM/addon.d/UPDATE-SuperSU.zip"))
-    script.FlashSuperSU()
-    # SuperSU leave /system unmounted while we need it mounted here to avoid
-    # a warning from non-Multirom TWRP
-    script.Mount("/system")
-
   script.ShowProgress(0.1, 0)
   script.Print("Enjoy PixelDust Goodness!");
   device_specific.FullOTA_InstallEnd()
